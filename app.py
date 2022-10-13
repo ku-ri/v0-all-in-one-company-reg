@@ -50,16 +50,6 @@ THEVCDB_ENGINES = {
     }), logging_name='primary', echo=echo),
 }
 
-THEVCDB_ENGINES = {
-    'primary' : create_engine(
-        'postgresql+psycopg2://{USER}:{PW}@{HOST}:{PORT}/{DB_NAME}'.format(**{
-            'USER' : 'api_company_reg_extractor',
-            'PW' : 'a34omdoidsa34',
-            'HOST' :'13.124.160.242',
-            'PORT' : '5432',
-            'DB_NAME' : 'thevcdb'
-    }), logging_name='primary', echo=echo),
-}
 
 
 
@@ -181,9 +171,17 @@ def main_func():
             continue
 
         else:
-            data_add = check_table(corp_number=number, status='request',created_at = current_time, computer=os.environ['computer'])
-            db.session.add(data_add)
-            db.session.commit()
+            if len(db.session.query(check_table.corp_number).filter(check_table.corp_number == number,
+                                                                    check_table.status == 'complete').all()):
+                update_date = db.session.query(check_table).filter(check_table.corp_number == number).first()
+                update_date.status = 'request'
+                update_date.created_at = current_time
+                update_date.computer = os.environ['computer']
+                db.session.commit()
+            else:
+                data_add = check_table(corp_number=number, status='request',created_at = current_time, computer=os.environ['computer'])
+                db.session.add(data_add)
+                db.session.commit()
     db.session.close()
     db.dispose()
 
@@ -1017,9 +1015,10 @@ def extract_pdf_func():
                             driver.switch_to.alert.accept()
                         except:
                             pass
-                    new_file_path = os.path.join('C:/', 'Users', 'thevc2', 'Documents',
+                    new_file_path = os.path.join('C:/', 'Users', 'thevc', 'Documents',
                                                  number.replace('-', '') + '.pdf')
-                    back_up_path = os.path.join('C:/', 'Users', 'thevc2','PycharmProjects', 'back_up',
+
+                    back_up_path = os.path.join('C:/', 'Users', 'thevc','Documents', 'back_up',
                                                 number.replace('-', '') + '.pdf')
                     ## 폴더에 파일 있으면 지우는 코드
                     if os.path.exists(new_file_path):
