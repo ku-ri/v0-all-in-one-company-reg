@@ -1016,7 +1016,7 @@ def extract_pdf_func():
                         except:
                             pass
 
-                    document_path = os.environ["docuemnt_path"]
+                    document_path = os.environ["document_path"]
                     new_file_path = os.path.join(document_path,
                                                  number.replace('-', '') + '.pdf')
 
