@@ -244,9 +244,9 @@ def extract_pdf_func():
 
 
     driver.find_element_by_css_selector('input#id_user_id.account_input').click()
-    time.sleep(1)
+    time.sleep(3)
     driver.find_element_by_css_selector('input#id_user_id.account_input').send_keys(params['user_id'])
-    time.sleep(1)
+    time.sleep(3)
     driver.find_element_by_css_selector('input#password').click()
     time.sleep(1)
     driver.find_element_by_css_selector('input#password').send_keys(params['password'])
@@ -1015,10 +1015,12 @@ def extract_pdf_func():
                             driver.switch_to.alert.accept()
                         except:
                             pass
-                    new_file_path = os.path.join('C:/', 'Users', 'thevc', 'Documents',
+
+                    document_path = os.environ["docuemnt_pat"]
+                    new_file_path = os.path.join(document_path,
                                                  number.replace('-', '') + '.pdf')
 
-                    back_up_path = os.path.join('C:/', 'Users', 'thevc','Documents', 'back_up',
+                    back_up_path = os.path.join(document_path,
                                                 number.replace('-', '') + '.pdf')
                     ## 폴더에 파일 있으면 지우는 코드
                     if os.path.exists(new_file_path):
@@ -1043,6 +1045,9 @@ def extract_pdf_func():
                     pyautogui.click()
                     pyautogui.doubleClick()
 
+                    pyautogui.press("win")
+                    time.sleep(1)
+                    pyautogui.press("esc")
                     time.sleep(2)
 
                     pyautogui.press('tab')
@@ -1094,9 +1099,8 @@ def extract_pdf_func():
                     # time.sleep(4)
                     # pyautogui.press('enter')
                     time.sleep(1)
-                    new_file_path = os.path.join(r"C:\Users\thevc2\Documents", number.replace('-', '') + '.pdf')
-                    back_up_path =  os.path.join(r"C:\Users\thevc2\PycharmProjects\back_up",
-                                           number.replace('-','') +'.pdf')
+                    new_file_path = os.path.join(document_path, number.replace('-', '') + '.pdf')
+                    back_up_path =  os.path.join(document_path,"back_up", number.replace('-','') +'.pdf')
                     current_time = datetime.today().strftime("%Y-%m-%d %H:%M")
                     if os.path.exists(new_file_path):
 
