@@ -409,7 +409,7 @@ def extract_pdf_func():
 
             idx_list_change = idx_list[1:] + [idx_list[0]]
 
-            index_N = idx_list_change[-1]
+            # index_N = idx_list_change[-1]
 
             #for idx in range(len(name_switch)-1,-1,-1):
             for idx in idx_list_change:
@@ -447,7 +447,7 @@ def extract_pdf_func():
 
 
 
-                if name.text != 'N' or (corp_number_id_candidate.text in corp_number_id_list and index_N!=idx):
+                if name.text != 'N' or (corp_number_id_candidate.text in corp_number_id_list):
                     continue
 
                 if name.text == 'N':
