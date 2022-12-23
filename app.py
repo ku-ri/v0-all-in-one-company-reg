@@ -271,7 +271,7 @@ def extract_pdf_func():
         except Exception as e:
             if '아이디는 필수입력항목' in str(e):
                 driver.switch_to.alert.accept()
-                time.sleep(1)
+                time.sleep(3)
                 driver.find_element_by_css_selector('input#id_user_id.account_input').send_keys(params['user_id'])
                 time.sleep(1)
                 driver.find_element_by_css_selector('#leftS > div > form > div.id_pw > ul > li.mt05 > a').click()
@@ -279,7 +279,7 @@ def extract_pdf_func():
                 time.sleep(5)
             elif '비밀번호는 필수입력항목' in str(e):
                 driver.switch_to.alert.accept()
-                time.sleep(1)
+                time.sleep(3)
                 driver.find_element_by_css_selector('input#password').send_keys(params['password'])
                 driver.find_element_by_css_selector('#leftS > div > form > div.id_pw > ul > li.mt05 > a').click()
                 driver.implicitly_wait(30)
@@ -540,7 +540,7 @@ def extract_pdf_func():
                     driver.switch_to.frame("frmOuterModal")
 
                     if driver.find_element_by_css_selector('h6').text == '임원항목 선택':
-                        driver.find_element_by_css_selector('#bimwonsun').click()
+                        driver.find_element_by_css_selector('#sellAll').click()
                         time.sleep(1)
                         driver.find_element_by_css_selector('#btnNext').click()
                         driver.implicitly_wait(10)
@@ -589,7 +589,7 @@ def extract_pdf_func():
                             driver.switch_to.frame("frmOuterModal")
 
                             if driver.find_element_by_css_selector('h6').text == '임원항목 선택':
-                                driver.find_element_by_css_selector('#bimwonsun').click()
+                                driver.find_element_by_css_selector('#sellAll').click()
                                 time.sleep(1)
                                 driver.find_element_by_css_selector('#btnNext').click()
                                 driver.implicitly_wait(10)
@@ -655,7 +655,7 @@ def extract_pdf_func():
                         driver.switch_to.frame("frmOuterModal")
 
                         if driver.find_element_by_css_selector('h6').text == '임원항목 선택':
-                            driver.find_element_by_css_selector('#bimwonsun').click()
+                            driver.find_element_by_css_selector('#sellAll').click()
                             time.sleep(1)
                             driver.find_element_by_css_selector('#btnNext').click()
                             driver.implicitly_wait(10)
